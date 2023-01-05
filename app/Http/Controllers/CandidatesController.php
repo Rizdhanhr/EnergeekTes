@@ -50,7 +50,7 @@ class CandidatesController extends Controller
             'email' => 'required|email|unique:candidates,email',
             'phone' => 'required|numeric|unique:candidates,phone',
             'year' => 'required|numeric',
-            'skill' => 'required|numeric'
+            'skill' => 'required'
         ]);
         try{
             DB::transaction(function () use($request){

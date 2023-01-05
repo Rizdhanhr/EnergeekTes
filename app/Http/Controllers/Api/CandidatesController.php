@@ -114,12 +114,10 @@ class CandidatesController extends Controller
     {
         $candidates = DB::table('candidates')
         ->join('jobs','jobs.id','candidates.job_id')
-        ->whereNull('candidates.deleted_by')
         ->where('candidates.id',$id)
         ->get(array(
             'candidates.*','jobs.name as jobs_name'
         ));
-
         return response()->json(['message' => 'Data Sukses Ditampilkan',"candidates" => $candidates], 200);
     }
 

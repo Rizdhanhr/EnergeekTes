@@ -62,7 +62,7 @@ class JobsController extends Controller
                     'updated_by' => 1
                 ]);
             });
-            return response()->json(['message' => 'Data Berhasil Ditambahkan','jobs' => $jobs], 200);
+            return response()->json(['message' => 'Data Berhasil Ditambahkan'], 200);
         }catch(Exception $e){
 
         }
@@ -78,7 +78,7 @@ class JobsController extends Controller
     {
         $jobs = DB::table('jobs')
         
-        ->whereNull('candidates.deleted_by')
+        ->whereNull('jobs.deleted_by')
         ->where('jobs.id',$id)
         ->get();
 
@@ -128,7 +128,7 @@ class JobsController extends Controller
                     'updated_by' => 1
                 ]);
             });
-            return response()->json(['message' => 'Data Berhasil Diupdate','jobs' => $jobs], 200);
+            return response()->json(['message' => 'Data Berhasil Diupdate'], 200);
         }catch(Exception $e){
 
         }

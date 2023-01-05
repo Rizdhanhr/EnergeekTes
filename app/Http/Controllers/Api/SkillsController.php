@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use Validator;
 
 class SkillsController extends Controller
 {
@@ -15,7 +17,7 @@ class SkillsController extends Controller
     public function index()
     {
         $skills = DB::table('skills')
-        ->whereNull('jobs.deleted_by')
+        ->whereNull('skills.deleted_by')
         ->get();
     
         return response()->json(['message' => 'Data Sukses Ditampilkan',"skills" => $skills], 200);
@@ -43,7 +45,7 @@ class SkillsController extends Controller
             'name' => 'required',
         );
         $messages=array(
-            'name.required' => 'Masukkan Nama Pekerjaan!.',
+            'name.required' => 'Masukkan Nama Skill!.',
         );
         $validator=Validator::make($request->all(),$rules,$messages);
         if($validator->fails())
@@ -61,7 +63,7 @@ class SkillsController extends Controller
                     'updated_by' => 1
                 ]);
             });
-            return response()->json(['message' => 'Data Berhasil Ditambahkan','skills' => $skills], 200);
+            return response()->json(['message' => 'Data Berhasil Ditambahkan'], 200);
         }catch(Exception $e){
 
         }
@@ -77,7 +79,7 @@ class SkillsController extends Controller
     {
         $skills = DB::table('skills')
         
-        ->whereNull('candidates.deleted_by')
+        ->whereNull('skills.deleted_by')
         ->where('skills.id',$id)
         ->get();
 
@@ -127,7 +129,7 @@ class SkillsController extends Controller
                     'updated_by' => 1
                 ]);
             });
-            return response()->json(['message' => 'Data Berhasil Diupdate','skills' => $skills], 200);
+            return response()->json(['message' => 'Data Berhasil Diupdate'], 200);
         }catch(Exception $e){
 
         }
